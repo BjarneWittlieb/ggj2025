@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4e6f79ef7e2e72f42be5d6e4ec67c253
+guid: b70fa7a9c66c42b4f8e0238a2f1a0539
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6021310640254610414
-    second: icon_repeat_dark_0
+      213: -9106543648476493724
+    second: star_grey_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icon_repeat_dark_0
+      name: star_grey_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 82
-        height: 72
+        width: 128
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 214185dffd1007ca0800000000000000
-      internalID: -6021310640254610414
+      spriteID: 46808fcdcce0f9180800000000000000
+      internalID: -9106543648476493724
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      icon_repeat_dark_0: -6021310640254610414
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
