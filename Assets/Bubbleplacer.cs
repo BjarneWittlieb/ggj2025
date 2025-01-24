@@ -1,26 +1,26 @@
+using System;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Bubbleplacer : MonoBehaviour
 {
     public Grid grid;
     
+    private Tilemap tilemap;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        placeAt(1, 5);
-        
+        tilemap = grid.GetComponentInChildren<Tilemap>();
     }
 
-    void placeAt(int x, int y)
+    public void placeOnGridPosition(int x, int y)
     {
-        Vector3 cellSize = grid.cellSize;
-        
-        float positionX = x * cellSize.x + grid.transform.position.x;
-        float positionY = y * cellSize.y + grid.transform.position.y;
-        
-        transform.position = new Vector3(positionX, positionY, transform.position.z);
-        
-        Debug.Log(transform.position);
+        if (tilemap == null)
+        {
+            tilemap = grid.GetComponentInChildren<Tilemap>();
+        }
+        transform.position = tilemap.CellToWorld(new Vector3Int(x, y, 0));
     }
     
     // Update is called once per frame
