@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BubbleMap : MonoBehaviour
 {
-    private readonly Dictionary<Vector2Int, GameObject> bubbles = new();
+    private readonly Dictionary<Vector2Int, BubbleBase> bubbles = new();
   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,12 +19,14 @@ public class BubbleMap : MonoBehaviour
 
     public void Add(Vector2Int pos, GameObject bubble)
     {
-        bubbles.Add(pos, bubble);
+        var bubbleBase = bubble.GetComponent<BubbleBase>();
+        bubbleBase.mapPosition = pos;
+        bubbles.Add(pos, bubbleBase);
     }
 
-    public bool TryGetBubble(Vector2Int pos, out GameObject bubble)
+    public bool TryGetBubble(Vector2Int pos, out BubbleBase bubbleBase)
     {
-        return bubbles.TryGetValue(pos, out bubble);
+        return bubbles.TryGetValue(pos, out bubbleBase);
     }
 
 }

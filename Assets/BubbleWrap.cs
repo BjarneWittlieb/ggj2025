@@ -8,12 +8,14 @@ public class BubbleWrap : MonoBehaviour
     
     public Vector2Int lowerRight;
 
-    private Grid _grid;
-    
+    private Grid      _grid;
+    private BubbleMap bubbleMap;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _grid = GetComponent<Grid>();
+        _grid      = GetComponent<Grid>();
+        bubbleMap = GetComponent<BubbleMap>();
         
         GameObject loadedBubblePrefab = Resources.Load<GameObject>("Prefabs/BasicBubble");
 
@@ -25,10 +27,10 @@ public class BubbleWrap : MonoBehaviour
                 Bubbleplacer placer = loadedBubble.GetComponent<Bubbleplacer>();
                 placer.grid = _grid;
                 placer.placeOnGridPosition(x, y);
+                bubbleMap.Add(new Vector2Int(x, y), loadedBubble);
             }
         }
     }
-
     
     IEnumerator<WaitForEndOfFrame> InstantiateAndInitialize(int x, int y, GameObject prefab)
     {
@@ -37,6 +39,7 @@ public class BubbleWrap : MonoBehaviour
         Bubbleplacer placer = loadedBubble.GetComponent<Bubbleplacer>();
         placer.grid = _grid;
         placer.placeOnGridPosition(x, y);
+        bubbleMap.Add(new Vector2Int(x, y), loadedBubble);
     }
 
     // Update is called once per frame
