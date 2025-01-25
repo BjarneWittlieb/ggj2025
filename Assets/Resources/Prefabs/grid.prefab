@@ -45,7 +45,7 @@ Grid:
   m_CellSize: {x: 0.8659766, y: 1, z: 1}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 1
-  m_CellSwizzle: 2
+  m_CellSwizzle: 0
 --- !u!114 &6251650599280935157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,8 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d348abdb4314df94ab9885a82159fc67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upperLeft: {x: -5, y: -5}
-  lowerRight: {x: 5, y: 5}
+  upperLeft: {x: -5, y: 5}
+  lowerRight: {x: 5, y: -5}
 --- !u!1 &9199922684709421488
 GameObject:
   m_ObjectHideFlags: 0
