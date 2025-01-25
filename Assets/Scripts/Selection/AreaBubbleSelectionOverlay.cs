@@ -42,7 +42,7 @@ namespace Selection
 
             foreach (var area in _bubbleType.areas)
             {
-                foreach (var surroundingBubble in GetBubblesInArea(currentBubble.CurrentPosition, area.Area))
+                foreach (var surroundingBubble in BubbleUtils.GetBubblesInArea(currentBubble.CurrentPosition, area.Area))
                 {
                     if (surroundingBubble == null)
                     {
@@ -55,36 +55,6 @@ namespace Selection
                     SetOpacityOfBubbleOverlay(area.percentage, selectionBubble);
                 }
             }
-        }
-
-        /// <summary>
-        ///From a starting position get's all surrounding bubbles in the specefied pattern.
-        ///
-        /// We need to transform the pattern, since the y axis alternates between up and down.
-        /// </summary>
-        /// <param name="startPosition"></param>
-        /// <param name="area"></param>
-        /// <returns></returns>
-        private List<GameObject> GetBubblesInArea(Vector2Int startPosition, List<Vector2Int> area)
-        {
-            // Don't touch this, it works! (@Corny)
-            return area
-                .Select(vec2 =>
-                {
-                    if (vec2.y % 2 == 0)
-                    {
-                        return _bubbleWrap.GetBubble(startPosition + vec2);
-                    }
-                    
-                    if (startPosition.y % 2 != 0)
-                    {
-                        return _bubbleWrap.GetBubble(startPosition + vec2 + new Vector2Int(1, 0));
-                    }
-                    
-                    return _bubbleWrap.GetBubble(startPosition + vec2);
-                })
-                .Where(bubble => bubble != null)
-                .ToList();
         }
         
         private void SetOpacityOfBubbleOverlay(float popPercentage, GameObject bubbleOveray)
