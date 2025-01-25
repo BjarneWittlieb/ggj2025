@@ -24,13 +24,13 @@ namespace Selection
 
         public void Render()
         {
-            Bubbleplacer currentBubble = BubbleUtils.FindBubbleCollidingWith<Bubbleplacer>(transform.position);
+            BubbleBase currentBubble = BubbleUtils.FindBubbleCollidingWith<BubbleBase>(transform.position);
 
             foreach (var area in _bubbleType.areas)
             {
-                foreach (var surroundingBubble in BubbleUtils.GetBubblesInArea(currentBubble.CurrentPosition, area.Area))
+                foreach (var surroundingBubble in BubbleUtils.GetBubblesInArea(currentBubble.gridPosition, area.Area))
                 {
-                    if (surroundingBubble == null)
+                    if (!surroundingBubble)
                     {
                         continue;
                     }
