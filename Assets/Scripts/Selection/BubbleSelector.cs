@@ -16,7 +16,7 @@ public class BubbleSelector : MonoBehaviour
     
     private PatternLoader _patternLoader;
     
-    public event Action<BasicBubble> OnSelect;
+    public event Action<GameObject, BubbleType> OnSelect;
 
     public event Action OnSelectionEnd;
     
@@ -45,9 +45,7 @@ public class BubbleSelector : MonoBehaviour
         if (_selectedBubble != null)
         {
             Bubbleplacer placer = _selectedBubble.GetComponent<Bubbleplacer>();
-            Debug.Log($"X: {placer.CurrentPosition.x}, y: {placer.CurrentPosition.y}");
-            Debug.Log($"y % 2: {placer.CurrentPosition.y % 2}");
-            OnSelect?.Invoke(_selectedBubble);
+            OnSelect?.Invoke(_selectedBubble.gameObject, _currentSelectionType);
         }
         
         _isSelectionActive = false;
