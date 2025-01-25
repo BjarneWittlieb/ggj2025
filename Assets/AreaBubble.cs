@@ -1,12 +1,24 @@
 ﻿using System.Collections;
 using Models;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 public class AreaBubble : BubbleBase
 {
     public AreaBubbleType bubbleType;
-        
+
+    [FormerlySerializedAs("jsonPath")] public string configName;
+
+    public void Start()
+    {
+        TextAsset[] jsonFiles = Resources.LoadAll<TextAsset>("BubbleConfigs/" + configName + ".json");
+        foreach (TextAsset file in jsonFiles)
+        {
+            bubbleType = JsonUtility.FromJson<AreaBubbleType>(file.text);
+        }
+    }
+    
     public override void Pop()
     {
         base.Pop();

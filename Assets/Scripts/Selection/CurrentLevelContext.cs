@@ -3,26 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using Models;
 using UnityEngine;
-using Utils;
 
 namespace Selection
 {
-    public class LevelSelection: MonoBehaviour
+    public class CurrentLevelContext: MonoBehaviour
     {
         // DEPENDENCIES
         private PatternLoader _patternLoader;
         private BubbleSelector _bubbleSelector;
         
         // FIELDS
-        private List<BubbleType> _placeableBubbles = new ();
+        private List<GameObject> _placeableBubbles = new ();
         private int _alreadyPlaced;
 
-        // OUTPUTS
-        public event Action AllBubblesPlaced;
         
         public void Start()
         {
-            _placeableBubbles = new List<BubbleType>();
+            _placeableBubbles = new List<GameObject>();
             _alreadyPlaced = 0;
             
             _patternLoader = GetComponent<PatternLoader>();
@@ -43,7 +40,7 @@ namespace Selection
 
             for (var i = 0; i < level_size; i++)
             {
-                _placeableBubbles.Add(_patternLoader.GetRandomPattern());
+                _placeableBubbles.Add(_patternLoader.GetRandomBubblePrefab());
             }
             
             Debug.Log("Level loaded!");
@@ -52,7 +49,7 @@ namespace Selection
             _bubbleSelector.OnSelect += PlaceBubble;
         }
         
-        public BubbleType GetCurrentBubble()
+        public GameObject GetCurrentBubble()
         {
             if (IsBubbleSettingComplete)
             {
@@ -64,14 +61,9 @@ namespace Selection
             return nextBubble;
         }
 
-        private void PlaceBubble(GameObject bubble, BubbleType bubbleType)
+        private void PlaceBubble(GameObject original, GameObject replacement)
         {
             _alreadyPlaced++;
-
-            if (IsBubbleSettingComplete)
-            {
-                AllBubblesPlaced?.Invoke();
-            }
         }
 
         public void OnDestroy()

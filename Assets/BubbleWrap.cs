@@ -21,8 +21,8 @@ public class BubbleWrap : MonoBehaviour
     void Start()
     {
         _grid               = GetComponent<Grid>();
-        tilemap             = _grid.GetComponent<Tilemap>();
-        _loadedBubblePrefab = Resources.Load<GameObject>("Prefabs/BasicBubble");
+        tilemap             = _grid.GetComponentInChildren<Tilemap>();
+        _loadedBubblePrefab = Resources.Load<GameObject>("Prefabs/BubbleTypes/BasicBubble");
 
         StartCoroutine(SpawnBubbles());
     }

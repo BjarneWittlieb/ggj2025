@@ -15,7 +15,7 @@ namespace Selection
         private AreaBubbleType _bubbleType;
 
         private GameObject _bubblePrefab;
-
+        
         public void Setup(BubbleType bubbleType)
         {
             _bubbleType = (AreaBubbleType) bubbleType;
@@ -24,6 +24,8 @@ namespace Selection
 
         public void Render()
         {
+            _bubbleType = GetComponent<AreaBubble>().bubbleType;
+            
             BubbleBase currentBubble = BubbleUtils.FindBubbleCollidingWith<BubbleBase>(transform.position);
 
             foreach (var area in _bubbleType.areas)

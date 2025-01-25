@@ -4,6 +4,7 @@ public class BubbleBase : MonoBehaviour
 {
     [SerializeField]  public int        score = 1;
     [SerializeField]  public float      scoreFactor;
+    [SerializeField]  public string     name;
     [HideInInspector] public Vector2Int gridPosition;
     
     private bool       isPopped;

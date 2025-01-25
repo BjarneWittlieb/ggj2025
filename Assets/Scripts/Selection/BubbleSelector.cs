@@ -2,6 +2,7 @@ using System;
 using Models;
 using Selection;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Utils;
 
@@ -17,7 +18,7 @@ public class BubbleSelector : MonoBehaviour
     // FIELDS
     private bool _isSelectionActive;
     private BasicBubble _selectedBubble;
-    private BubbleType _currentSelectionType;
+    private GameObject _currentSelectedBubblePrefab;
     private ISelectionOverlay _currentSelectionOverlay;
 
     private Vector2Int _beforeSelectedPosition;
@@ -26,10 +27,10 @@ public class BubbleSelector : MonoBehaviour
     private PatternLoader _patternLoader;
     // TODO Rmove this, it's a helper to generate new patterns.
     private PatternGenerator _patternGenerator;
-    private LevelSelection _levelSelection;
+    private CurrentLevelContext _currentLevelContext;
     
     // OUTPUTS
-    public event Action<GameObject, BubbleType> OnSelect;
+    public event Action<GameObject, GameObject> OnSelect;
     public event Action OnSelectionEnd;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,15 +38,13 @@ public class BubbleSelector : MonoBehaviour
     {
         _patternLoader = GetComponent<PatternLoader>();
         _patternGenerator = GetComponent<PatternGenerator>();
-        _levelSelection = GetComponent<LevelSelection>();
+        _currentLevelContext = GetComponent<CurrentLevelContext>();
     }
 
     public void StartSelectionProcess()
     {
         // manual selection only for pattern creation. In a level type setup this should always be false
-        _currentSelectionType = manualPatternConfiguration ? 
-            _patternGenerator.GetPattern() : 
-            _levelSelection.GetCurrentBubble();
+        _currentSelectedBubblePrefab = _currentLevelContext.GetCurrentBubble();
         
         _selectedBubble = null;
         _isSelectionActive = true;
@@ -55,7 +54,7 @@ public class BubbleSelector : MonoBehaviour
     {
         if (_selectedBubble != null)
         {
-            OnSelect?.Invoke(_selectedBubble.gameObject, _currentSelectionType);
+            OnSelect?.Invoke(_selectedBubble.gameObject, _currentSelectedBubblePrefab);
         }
         
         _isSelectionActive = false;
@@ -65,7 +64,7 @@ public class BubbleSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_levelSelection.IsBubbleSettingComplete)
+        if (_currentLevelContext.IsBubbleSettingComplete)
         {
             return;
         }
@@ -111,15 +110,12 @@ public class BubbleSelector : MonoBehaviour
         
         DestroySelection();
 
-        switch (_currentSelectionType)
+        _currentSelectionOverlay = _currentSelectedBubblePrefab.GetComponent<ISelectionOverlay>();
+
+        if (_currentSelectionOverlay != null)
         {
-            case AreaBubbleType _:
-                _currentSelectionOverlay = gameObject.AddComponent<AreaBubbleSelectionOverlay>();
-                break;
+            _currentSelectionOverlay.Render();
         }
-        
-        _currentSelectionOverlay.Setup(_currentSelectionType);
-        _currentSelectionOverlay.Render();
         
         _beforeSelectedPosition = currentPosition;
     }

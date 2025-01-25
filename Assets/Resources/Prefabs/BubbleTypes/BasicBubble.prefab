@@ -1,4 +1,4 @@
-%YAML 1.1
+﻿%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &252782661514999744
 GameObject:
@@ -96,7 +96,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5122580298276805489}
-  - component: {fileID: 7240777441465534677}
   - component: {fileID: 2633463040749383665}
   - component: {fileID: 6494641167157994924}
   - component: {fileID: 817898892229185085}
@@ -128,19 +127,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00022854, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7240777441465534677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513474044713686279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80a5b3bba2feefa4e9dd2b9a2c28c351, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grid: {fileID: 0}
 --- !u!114 &2633463040749383665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5abece42de95ab47bcff5b769485e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 1
+  scoreFactor: 0
+  name: Basic
+  gridPosition: {x: 0, y: 0}
 --- !u!58 &6494641167157994924
 CircleCollider2D:
   m_ObjectHideFlags: 0
