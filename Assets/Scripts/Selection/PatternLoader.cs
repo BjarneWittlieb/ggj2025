@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Models;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Utils
+namespace Selection
 {
     public class PatternLoader: MonoBehaviour
     {
-        private Dictionary<String, AreaBubbleType> areaBubbleTypes = new Dictionary<String, AreaBubbleType>();
+        private Dictionary<String, AreaBubbleType> areaBubbleTypes = new ();
         
         public void Start()
         {
+            Debug.Log("start of pattern loader");
             TextAsset[] jsonFiles = Resources.LoadAll<TextAsset>("BubbleConfigs");
-            Debug.Log($"LOaded BubbleConfigs: {jsonFiles.Length}");
             foreach (TextAsset file in jsonFiles)
             {
                 AreaBubbleType areaBubbleType = JsonUtility.FromJson<AreaBubbleType>(file.text);
                 
                 areaBubbleTypes.Add(file.name, areaBubbleType);
-                Debug.Log(file.text);
-                Debug.Log(JsonUtility.ToJson(areaBubbleType));
             }
         }
 
@@ -34,7 +30,6 @@ namespace Utils
         public AreaBubbleType GetRandomPattern()
         {
             var allKeys = areaBubbleTypes.Keys;
-            Debug.Log(allKeys.Count);
             var randomKey = allKeys.ElementAt(UnityEngine.Random.Range(0, allKeys.Count));
             
             return GetPatternFromPath(randomKey);
