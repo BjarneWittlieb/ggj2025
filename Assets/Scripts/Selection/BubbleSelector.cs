@@ -43,7 +43,7 @@ public class BubbleSelector : MonoBehaviour
 
     public void StartSelectionProcess()
     {
-        // manual selection only for pattern cration. In a level type setup this should always be false
+        // manual selection only for pattern creation. In a level type setup this should always be false
         _currentSelectionType = manualPatternConfiguration ? 
             _patternGenerator.GetPattern() : 
             _levelSelection.GetCurrentBubble();
@@ -66,18 +66,19 @@ public class BubbleSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_isSelectionActive)
+        if (_levelSelection.IsBubbleSettingComplete)
         {
             return;
         }
 
+        if (!_isSelectionActive)
+        {
+            StartSelectionProcess();
+        }
+        
         if (Input.GetMouseButton((int) MouseButton.Left))
         {
             EndSelectionProcess();
-            return;
-        } else if (Input.GetKey(KeyCode.Escape))
-        {
-            // ABORT
             return;
         }
         
@@ -88,7 +89,9 @@ public class BubbleSelector : MonoBehaviour
         if (_selectedBubble != null)
         {
             _currentSelectedPosition = _selectedBubble.GetComponent<Bubbleplacer>().CurrentPosition;
-            transform.position = _selectedBubble.transform.position;
+
+            var newPos = new Vector3(_selectedBubble.transform.position.x, _selectedBubble.transform.position.y, transform.position.z);
+            transform.position = newPos;
             
             RenderSelection();
         }

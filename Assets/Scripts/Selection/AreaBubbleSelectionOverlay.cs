@@ -34,9 +34,10 @@ namespace Selection
                     {
                         continue;
                     }
-                
-                    GameObject selectionBubble = Instantiate(_bubblePrefab, surroundingBubble.transform.position, Quaternion.identity, transform);
-                    selectionBubble.transform.parent = transform;
+
+                    var position = surroundingBubble.transform.position;
+                    position.z = transform.position.z;
+                    GameObject selectionBubble = Instantiate(_bubblePrefab, position, Quaternion.identity, transform);
                     
                     SetOpacityOfBubbleOverlay(area.percentage, selectionBubble);
                     SetupWobbleOfOverlay(selectionBubble, surroundingBubble);
