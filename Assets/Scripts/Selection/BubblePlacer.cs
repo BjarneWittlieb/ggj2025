@@ -20,12 +20,15 @@ namespace Selection
             _bubbleSelector.OnSelect -= HandleSelect;
         }
 
-        void HandleSelect(GameObject bubble, BubbleType selectedType)
+        void HandleSelect(GameObject original, GameObject replacement)
         {
-            // The bubble is now the new bubble type, So delete previous bubble type
-            BubbleBase bubbleBase = bubble.GetComponent<BubbleBase>();
-            Destroy(bubbleBase);
+            Instantiate(replacement, original.transform.position, Quaternion.identity, original.transform.parent);
+            // TODO set in bubblewrap
             
+            // The bubble is now the new bubble type, So delete previous bubble type
+            Destroy(original);
+            
+            /*
             switch (selectedType)
             {
                 case AreaBubbleType areaBubbleType:
@@ -35,6 +38,7 @@ namespace Selection
                 default:
                     throw new NotImplementedException("Currently only area bubble is placeable.");
             }
+            */
         }
     }
 }

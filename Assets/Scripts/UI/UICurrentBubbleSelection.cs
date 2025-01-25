@@ -57,17 +57,17 @@ namespace UI
                 return;
             }
             
-            LevelSelection levelSelection = _bubbleSelector.GetComponent<LevelSelection>();
+            CurrentLevelContext currentLevelContext = _bubbleSelector.GetComponent<CurrentLevelContext>();
 
-            if (levelSelection.IsBubbleSettingComplete)
+            if (currentLevelContext.IsBubbleSettingComplete)
             {
                 _textMeshPro.text = "All bubbles placed. Click to pop the first bubble!";
                 return;
             }
             
-            var currentBubble = levelSelection.GetCurrentBubble();
+            var currentBubble = currentLevelContext.GetCurrentBubble();
             
-            _textMeshPro.text = "Current bubble:\n" + currentBubble.name;
+            _textMeshPro.text = "Current bubble:\n" + currentBubble.GetComponent<BubbleBase>().name;
         }
 
         public void OnDestroy()
