@@ -13,7 +13,7 @@ public class BubbleWobble : MonoBehaviour
     {
         initialScale  =  transform.localScale;
         wobbleSpeed   += Random.Range(-.2f, .2f);
-        wobbleScale   += Random.Range(-.05f, .05f);
+        wobbleScale   += Random.Range(wobbleScale / 2f, wobbleScale / 2f);
         randomOffsetX =  Random.Range(0f, Mathf.PI * 2f);
         randomOffsetY =  Random.Range(0f, Mathf.PI * 2f);
     }
