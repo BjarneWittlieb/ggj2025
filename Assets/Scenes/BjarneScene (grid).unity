@@ -769,6 +769,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5336731704289082890, guid: 18a98c6a34aafcc46b95e1029ab40669, type: 3}
+      propertyPath: m_CellSwizzle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6251650599280935157, guid: 18a98c6a34aafcc46b95e1029ab40669, type: 3}
       propertyPath: upperLeft.y
       value: 5
