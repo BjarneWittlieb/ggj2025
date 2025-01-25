@@ -14,38 +14,27 @@ public class BubbleSelector : MonoBehaviour
     
     private ISelectionOverlay _currentSelectionOverlay;
     
-    public event Action<BasicBubble> OnSelect;
+    private PatternLoader _patternLoader;
+    
+    public event Action<GameObject, BubbleType> OnSelect;
 
     public event Action OnSelectionEnd;
+    
+    // TODO Rmove this, it's a helper to generate new patterns.
+    private PatternGenerator _patternGenerator;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _patternLoader = GetComponent<PatternLoader>();
+        _patternGenerator = GetComponent<PatternGenerator>();
     }
 
     public void StartSelectionProcess()
     {
         // TODO make area bubble passable
-        _currentSelectionType = new AreaBubbleType()
-        {
-            Areas = new []
-            {
-                new BubbleAreaWithPercentage()
-                {
-                    Area = new Vector2Int[]
-                        {
-                            new Vector2Int(0, 1),
-                            new Vector2Int(0, -1),
-                            new Vector2Int(-1, 0),
-                            new Vector2Int(-1, -1),
-                            new Vector2Int(-1, 1),
-                            new Vector2Int(1, 0),
-                        },
-                    Percentage = 1
-                },
-
-            }
-        };
+        // _currentSelectionType = _patternLoader.GetRandomPattern();
+        _currentSelectionType = _patternGenerator.GetPattern();
         
         _selectedBubble = null;
         _isSelectionActive = true;
@@ -56,9 +45,7 @@ public class BubbleSelector : MonoBehaviour
         if (_selectedBubble != null)
         {
             Bubbleplacer placer = _selectedBubble.GetComponent<Bubbleplacer>();
-            Debug.Log($"X: {placer.CurrentPosition.x}, y: {placer.CurrentPosition.y}");
-            Debug.Log($"y % 2: {placer.CurrentPosition.y % 2}");
-            OnSelect?.Invoke(_selectedBubble);
+            OnSelect?.Invoke(_selectedBubble.gameObject, _currentSelectionType);
         }
         
         _isSelectionActive = false;

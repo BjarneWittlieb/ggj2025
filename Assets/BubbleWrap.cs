@@ -31,10 +31,9 @@ public class BubbleWrap : MonoBehaviour
             for (int y = upperLeft.y; y >= lowerRight.y; y--)
             {
                 GameObject loadedBubble =
-                    Instantiate(_loadedBubblePrefab, new Vector3(x, y, 0), Quaternion.identity);
+                    Instantiate(_loadedBubblePrefab, new Vector3(x, y, 0), Quaternion.identity, transform);
                 Bubbleplacer placer = loadedBubble.GetComponent<Bubbleplacer>();
 
-                placer.transform.parent = transform;
                 placer.grid = _grid;
 
                 placer.placeOnGridPosition(x, y);
