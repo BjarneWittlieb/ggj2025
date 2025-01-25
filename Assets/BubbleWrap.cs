@@ -1,5 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
+using System.Threading;
 using UnityEngine;
 
 public class BubbleWrap : MonoBehaviour
@@ -8,40 +9,52 @@ public class BubbleWrap : MonoBehaviour
     
     public Vector2Int lowerRight;
 
-    private Grid      _grid;
-    private BubbleMap bubbleMap;
+    private Grid _grid;
 
+    private GameObject _loadedBubblePrefab;
+    
+    private readonly Dictionary<Vector2Int, GameObject> _allBubbles = new ();
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _grid      = GetComponent<Grid>();
-        bubbleMap = GetComponent<BubbleMap>();
-        
-        GameObject loadedBubblePrefab = Resources.Load<GameObject>("Prefabs/BasicBubble");
+        _grid = GetComponent<Grid>();
+        _loadedBubblePrefab = Resources.Load<GameObject>("Prefabs/BasicBubble");
 
+        StartCoroutine(SpawnBubbles());
+    }
+    
+    IEnumerator SpawnBubbles()
+    {
         for (int x = upperLeft.x; x <= lowerRight.x; x++)
         {
             for (int y = upperLeft.y; y >= lowerRight.y; y--)
             {
-                GameObject loadedBubble = Instantiate(loadedBubblePrefab, new Vector3(x, y, 0), Quaternion.identity);
+                GameObject loadedBubble =
+                    Instantiate(_loadedBubblePrefab, new Vector3(x, y, 0), Quaternion.identity);
                 Bubbleplacer placer = loadedBubble.GetComponent<Bubbleplacer>();
+
+                placer.transform.parent = transform;
                 placer.grid = _grid;
+
                 placer.placeOnGridPosition(x, y);
-                bubbleMap.Add(new Vector2Int(x, y), loadedBubble);
+                _allBubbles[new Vector2Int(x, y)] = loadedBubble;
+                
+                yield return new WaitForSeconds(.01f);
             }
         }
     }
     
-    IEnumerator<WaitForEndOfFrame> InstantiateAndInitialize(int x, int y, GameObject prefab)
+    public GameObject GetBubble(Vector2Int pos)
     {
-        GameObject loadedBubble = Instantiate(prefab, new Vector3(x, y, 0), Quaternion.identity);
-        yield return new WaitForEndOfFrame();
-        Bubbleplacer placer = loadedBubble.GetComponent<Bubbleplacer>();
-        placer.grid = _grid;
-        placer.placeOnGridPosition(x, y);
-        bubbleMap.Add(new Vector2Int(x, y), loadedBubble);
-    }
+        if (_allBubbles.ContainsKey(pos)) 
+        {
+            return _allBubbles[pos];
+        }
+        return null;
 
+    }
+    
     // Update is called once per frame
     void Update()
     {
