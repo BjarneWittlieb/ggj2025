@@ -39,15 +39,28 @@ namespace Selection
                     selectionBubble.transform.parent = transform;
                     
                     SetOpacityOfBubbleOverlay(area.percentage, selectionBubble);
+                    SetupWobbleOfOverlay(selectionBubble, surroundingBubble);
                 }
             }
         }
         
-        private void SetOpacityOfBubbleOverlay(float popPercentage, GameObject bubbleOveray)
+        private void SetOpacityOfBubbleOverlay(float popPercentage, GameObject bubbleOverlay)
         {
-            SpriteRenderer renderer = bubbleOveray.GetComponent<SpriteRenderer>();
+            SpriteRenderer renderer = bubbleOverlay.GetComponent<SpriteRenderer>();
             var baseOpacity = renderer.color.a;
             renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, baseOpacity * popPercentage);
+        }
+        
+        private void SetupWobbleOfOverlay(GameObject bubbleOverlay, GameObject originalBubble)
+        {
+            var bubbleWobble = originalBubble.GetComponent<BubbleWobble>();
+            var highlighting = bubbleOverlay.GetComponent<BubbleHighlighting>();
+            
+            Debug.Log(bubbleWobble);
+            Debug.Log(highlighting);
+            
+            highlighting.BubbleWobble = bubbleWobble;
+            highlighting.AdjustToBubble = true;
         }
         
         public void Destroy()
