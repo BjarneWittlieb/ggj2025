@@ -4,6 +4,8 @@ namespace Models
 {
     public class AreaBubbleType: BubbleType
     {
-        public BubbleAreaWithPercentage[] Areas { get; set; }
+        [SerializeField] private BubbleAreaWithPercentage[] areas;
+
+        public BubbleAreaWithPercentage[] Areas => areas;
     }
 }

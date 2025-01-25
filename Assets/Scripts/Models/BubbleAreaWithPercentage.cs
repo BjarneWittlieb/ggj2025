@@ -4,8 +4,12 @@ namespace Models
 {
     public class BubbleAreaWithPercentage
     {
-        public Vector2Int[] Area { get; set; }
+        [SerializeField] private Vector2Int[] area;
+
+        public Vector2Int[] Area => area;
+
+        [SerializeField] private float percenetage;
         
-        public float Percentage { get; set; }
+        public float Percentage => percenetage;
     }
 }

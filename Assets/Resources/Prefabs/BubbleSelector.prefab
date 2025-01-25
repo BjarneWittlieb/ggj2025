@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5307893499644724636}
   - component: {fileID: 4214313394742651523}
+  - component: {fileID: 58588978740873958}
   m_Layer: 0
   m_Name: BubbleSelector
   m_TagString: Untagged
@@ -44,6 +45,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f27d1bd3f9239a54cbe8f589705bed07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &58588978740873958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683027866466554739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce34e4b9ab494f27a3ee35fc0c62ba89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7566228152840905520
