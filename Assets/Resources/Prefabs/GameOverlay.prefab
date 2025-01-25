@@ -96,7 +96,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082871873138526102}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -833,7 +833,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5058167476032049188}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1785,7 +1785,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8073227748544680537}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1839,8 +1839,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 627017732635966103}
-  - {fileID: 7902094155282000128}
   - {fileID: 5234574452845324162}
+  - {fileID: 7902094155282000128}
   m_Father: {fileID: 518118719842845473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1971,9 +1971,45 @@ PrefabInstance:
     m_TransformParent: {fileID: 7557560442587861364}
     m_Modifications:
     - target: {fileID: 53923323919282551, guid: 77051137d312f7c43ae50cf7796c815e, type: 3}
+      propertyPath: star1
+      value: 
+      objectReference: {fileID: 5773118013329461586}
+    - target: {fileID: 53923323919282551, guid: 77051137d312f7c43ae50cf7796c815e, type: 3}
+      propertyPath: star2
+      value: 
+      objectReference: {fileID: 5721720764476431777}
+    - target: {fileID: 53923323919282551, guid: 77051137d312f7c43ae50cf7796c815e, type: 3}
+      propertyPath: star3
+      value: 
+      objectReference: {fileID: 4181218080854526038}
+    - target: {fileID: 53923323919282551, guid: 77051137d312f7c43ae50cf7796c815e, type: 3}
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 121134763373326060}
+    - target: {fileID: 53923323919282551, guid: 77051137d312f7c43ae50cf7796c815e, type: 3}
+      propertyPath: star1Sprite
+      value: 
+      objectReference: {fileID: 5773118013329461586}
+    - target: {fileID: 53923323919282551, guid: 77051137d312f7c43ae50cf7796c815e, type: 3}
+      propertyPath: star2Sprite
+      value: 
+      objectReference: {fileID: 5721720764476431777}
+    - target: {fileID: 53923323919282551, guid: 77051137d312f7c43ae50cf7796c815e, type: 3}
+      propertyPath: star3Sprite
+      value: 
+      objectReference: {fileID: 4181218080854526038}
+    - target: {fileID: 53923323919282551, guid: 77051137d312f7c43ae50cf7796c815e, type: 3}
+      propertyPath: scoreForStar1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 53923323919282551, guid: 77051137d312f7c43ae50cf7796c815e, type: 3}
+      propertyPath: scoreForStar2
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 53923323919282551, guid: 77051137d312f7c43ae50cf7796c815e, type: 3}
+      propertyPath: scoreForStar3
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2705521772624866260, guid: 77051137d312f7c43ae50cf7796c815e, type: 3}
       propertyPath: m_Name
       value: ScoreLogic
