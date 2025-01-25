@@ -40,6 +40,7 @@ public class BubbleWrap : MonoBehaviour
                 _allBubbles[new Vector2Int(x, y)] = loadedBubble;
             }
         }
+        
         yield return null;
     }
 

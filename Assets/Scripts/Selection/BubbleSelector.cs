@@ -19,6 +19,9 @@ public class BubbleSelector : MonoBehaviour
     private BasicBubble _selectedBubble;
     private BubbleType _currentSelectionType;
     private ISelectionOverlay _currentSelectionOverlay;
+
+    private Vector2Int _currentSelectedPosition;
+    private Vector2Int _beforeSelectedPosition;
     
     // DEPENDENCIES
     private PatternLoader _patternLoader;
@@ -84,18 +87,27 @@ public class BubbleSelector : MonoBehaviour
 
         if (_selectedBubble != null)
         {
+            _currentSelectedPosition = _selectedBubble.GetComponent<Bubbleplacer>().CurrentPosition;
             transform.position = _selectedBubble.transform.position;
             
             RenderSelection();
         }
         else
         {
+            // Set to impossible position so it will be rerendered next time
+            _currentSelectedPosition = new Vector2Int(Int32.MaxValue, Int32.MaxValue);
             DestroySelection();
         }
     }
 
     void RenderSelection()
     {
+        // Only trigger rerender if the current position changed 
+        if (_currentSelectedPosition == _beforeSelectedPosition)
+        {
+            return;
+        }
+        
         DestroySelection();
 
         switch (_currentSelectionType)
@@ -107,6 +119,8 @@ public class BubbleSelector : MonoBehaviour
         
         _currentSelectionOverlay.Setup(_currentSelectionType);
         _currentSelectionOverlay.Render();
+        
+        _beforeSelectedPosition = _currentSelectedPosition;
     }
 
     void DestroySelection()
