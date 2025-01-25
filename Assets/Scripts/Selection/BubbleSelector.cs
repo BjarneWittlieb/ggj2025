@@ -20,7 +20,6 @@ public class BubbleSelector : MonoBehaviour
     private BubbleType _currentSelectionType;
     private ISelectionOverlay _currentSelectionOverlay;
 
-    private Vector2Int _currentSelectedPosition;
     private Vector2Int _beforeSelectedPosition;
     
     // DEPENDENCIES
@@ -43,7 +42,7 @@ public class BubbleSelector : MonoBehaviour
 
     public void StartSelectionProcess()
     {
-        // manual selection only for pattern cration. In a level type setup this should always be false
+        // manual selection only for pattern creation. In a level type setup this should always be false
         _currentSelectionType = manualPatternConfiguration ? 
             _patternGenerator.GetPattern() : 
             _levelSelection.GetCurrentBubble();
@@ -66,18 +65,19 @@ public class BubbleSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_isSelectionActive)
+        if (_levelSelection.IsBubbleSettingComplete)
         {
             return;
         }
 
+        if (!_isSelectionActive)
+        {
+            StartSelectionProcess();
+        }
+        
         if (Input.GetMouseButton((int) MouseButton.Left))
         {
             EndSelectionProcess();
-            return;
-        } else if (Input.GetKey(KeyCode.Escape))
-        {
-            // ABORT
             return;
         }
         
@@ -87,23 +87,24 @@ public class BubbleSelector : MonoBehaviour
 
         if (_selectedBubble != null)
         {
-            _currentSelectedPosition = _selectedBubble.GetComponent<Bubbleplacer>().CurrentPosition;
-            transform.position = _selectedBubble.transform.position;
+            var currentPosition = _selectedBubble.gridPosition;
+            var newPos = new Vector3(_selectedBubble.transform.position.x, _selectedBubble.transform.position.y, transform.position.z);
+            transform.position = newPos;
             
-            RenderSelection();
+            RenderSelection(currentPosition);
         }
         else
         {
+            _beforeSelectedPosition = new Vector2Int(Int32.MaxValue, Int32.MaxValue);
             // Set to impossible position so it will be rerendered next time
-            _currentSelectedPosition = new Vector2Int(Int32.MaxValue, Int32.MaxValue);
             DestroySelection();
         }
     }
 
-    void RenderSelection()
+    void RenderSelection(Vector2Int currentPosition)
     {
         // Only trigger rerender if the current position changed 
-        if (_currentSelectedPosition == _beforeSelectedPosition)
+        if (currentPosition == _beforeSelectedPosition)
         {
             return;
         }
@@ -120,7 +121,7 @@ public class BubbleSelector : MonoBehaviour
         _currentSelectionOverlay.Setup(_currentSelectionType);
         _currentSelectionOverlay.Render();
         
-        _beforeSelectedPosition = _currentSelectedPosition;
+        _beforeSelectedPosition = currentPosition;
     }
 
     void DestroySelection()

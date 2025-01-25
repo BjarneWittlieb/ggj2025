@@ -1,30 +1,27 @@
-using System.Collections;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Utils;
 
 public class BubbleBase : MonoBehaviour
 {
-    private bool _isPopped = false;
-    private int _value = 1;
-    private ScoreLogic scoreLogic;
+    [SerializeField]  public int        score = 1;
+    [SerializeField]  public float      scoreFactor;
+    [HideInInspector] public Vector2Int gridPosition;
     
+    private bool       isPopped;
+    private ScoreLogic scoreLogic;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
         scoreLogic = GameObject.Find("ScoreLogic").GetComponent<ScoreLogic>();
     }
-    
+
     public virtual void Pop()
     {
-        if (!_isPopped)
-        {
-            _isPopped = true;
-        }
-        
-        scoreLogic.AddToScore(_value);
-        
+        if (!isPopped)
+            isPopped = true;
+
+        scoreLogic.AddToScore(score);
+
         // TODO start pop animation and sound and such
         Destroy(gameObject);
     }
