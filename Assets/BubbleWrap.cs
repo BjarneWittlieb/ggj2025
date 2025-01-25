@@ -38,10 +38,9 @@ public class BubbleWrap : MonoBehaviour
 
                 placer.placeOnGridPosition(x, y);
                 _allBubbles[new Vector2Int(x, y)] = loadedBubble;
-                
-                yield return new WaitForSeconds(.01f);
             }
         }
+        yield return null;
     }
     
     public GameObject GetBubble(Vector2Int pos)

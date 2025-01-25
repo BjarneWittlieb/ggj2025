@@ -12,21 +12,9 @@ namespace Selection
 {
     public class AreaBubbleSelectionOverlay: MonoBehaviour, ISelectionOverlay
     {
-        private BubbleWrap _bubbleWrap;
-        
         private AreaBubbleType _bubbleType;
 
         private GameObject _bubblePrefab;
-        
-        public void Start()
-        {
-            _bubbleWrap = GameObject.Find("grid").GetComponent<BubbleWrap>();
-        }
-
-        public void Update()
-        {
-            
-        }
 
         public void Setup(BubbleType bubbleType)
         {
@@ -36,8 +24,6 @@ namespace Selection
 
         public void Render()
         {
-            _bubbleWrap = GameObject.Find("grid").GetComponent<BubbleWrap>();
-
             Bubbleplacer currentBubble = BubbleUtils.FindBubbleCollidingWith<Bubbleplacer>(transform.position);
 
             foreach (var area in _bubbleType.areas)
@@ -66,9 +52,13 @@ namespace Selection
         
         public void Destroy()
         {
-            // Destroy all children
+            // Destroy all children except the default one
             foreach (Transform child in transform)
             {
+                if (child.name == "CenterSelection")
+                {
+                    continue;
+                }
                 Destroy(child.gameObject);
             }
         }
