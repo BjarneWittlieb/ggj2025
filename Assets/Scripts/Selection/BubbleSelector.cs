@@ -14,6 +14,8 @@ public class BubbleSelector : MonoBehaviour
     
     private ISelectionOverlay _currentSelectionOverlay;
     
+    private PatternLoader _patternLoader;
+    
     public event Action<BasicBubble> OnSelect;
 
     public event Action OnSelectionEnd;
@@ -21,31 +23,13 @@ public class BubbleSelector : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _patternLoader = GetComponent<PatternLoader>();
     }
 
     public void StartSelectionProcess()
     {
         // TODO make area bubble passable
-        _currentSelectionType = new AreaBubbleType()
-        {
-            Areas = new []
-            {
-                new BubbleAreaWithPercentage()
-                {
-                    Area = new Vector2Int[]
-                        {
-                            new Vector2Int(0, 1),
-                            new Vector2Int(0, -1),
-                            new Vector2Int(-1, 0),
-                            new Vector2Int(-1, -1),
-                            new Vector2Int(-1, 1),
-                            new Vector2Int(1, 0),
-                        },
-                    Percentage = 1
-                },
-
-            }
-        };
+        _currentSelectionType = _patternLoader.GetRandomPattern();
         
         _selectedBubble = null;
         _isSelectionActive = true;
