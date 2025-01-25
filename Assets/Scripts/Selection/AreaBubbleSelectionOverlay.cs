@@ -67,40 +67,7 @@ namespace Selection
         /// <returns></returns>
         private List<GameObject> GetBubblesInArea(Vector2Int startPosition, Vector2Int[] area)
         {
-            // The area needs to be transformed
-            var transformedArea = area.Select(vec2 =>
-            {
-                // If the looked at vector is on an even axis, the relative position to the start is always the same
-                // Since the axes run parallel
-                if (vec2.x % 2 == 0)
-                {
-                    return vec2;
-                }
-                
-                // If the start position is on an even y axis, the pattern next x step will be up
-                if (startPosition.x % 2 == 0)
-                {
-                    if (vec2.y > 0)
-                    {
-                        return new Vector2Int(vec2.x, vec2.y + 1);
-                    } 
-                    return vec2;
-                }
-                // If the start position is on an uneven y axis, the pattern next x step will be down
-                else if (startPosition.x % 2 == 1)
-                {
-                    if (vec2.y < 0)
-                    {
-                        return new Vector2Int(vec2.x, vec2.y - 1);
-                    }
-
-                    return vec2;
-                }
-
-                return vec2;
-            });
-            
-            
+            // Don't touch this, it works! (@Corny)
             return area
                 .Select(vec2 =>
                 {
@@ -118,30 +85,6 @@ namespace Selection
                 })
                 .Where(bubble => bubble != null)
                 .ToList();
-            
-            // We need to transform the position, since the area will have a different layout depending on whether
-            // it is on an even or odd position
-
-            if (startPosition.x % 2 == 0)
-            {
-                return area
-                    .Select(vec2 => _bubbleWrap.GetBubble(startPosition + vec2))
-                    .Where(bubble => bubble != null)
-                    .ToList();
-            }
-            else
-            {
-                return area.Select(vec2 =>
-                {
-                    if (vec2.x % 2 == 0)
-                    {
-                        return _bubbleWrap.GetBubble(startPosition + vec2);
-                    }
-                    
-                    return _bubbleWrap.GetBubble(startPosition + vec2 + new Vector2Int(0, -1));
-                }).Where(bubble => bubble != null)
-                    .ToList();
-            }
         }
         
         private void SetOpacityOfBubbleOverlay(float popPercentage, GameObject bubbleOveray)
