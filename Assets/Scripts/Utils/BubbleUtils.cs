@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace Utils
 {
@@ -25,5 +27,38 @@ namespace Utils
 
             return default;
         }
+        
+            /// <summary>
+            ///From a starting position get's all surrounding bubbles in the specefied pattern.
+            ///
+            /// We need to transform the pattern, since the y axis alternates between up and down.
+            /// </summary>
+            /// <param name="startPosition"></param>
+            /// <param name="area"></param>
+            /// <returns></returns>
+        public static List<GameObject> GetBubblesInArea(Vector2Int startPosition, List<Vector2Int> area)
+        {
+            var bubbleWrap = GameObject.Find("grid").GetComponent<BubbleWrap>();
+
+            // Don't touch this, it works! (@Corny)
+            return area
+                .Select(vec2 =>
+                {
+                    if (vec2.y % 2 == 0)
+                    {
+                        return bubbleWrap.GetBubble(startPosition + vec2);
+                    }
+                    
+                    if (startPosition.y % 2 != 0)
+                    {
+                        return bubbleWrap.GetBubble(startPosition + vec2 + new Vector2Int(1, 0));
+                    }
+                    
+                    return bubbleWrap.GetBubble(startPosition + vec2);
+                })
+                .Where(bubble => bubble != null)
+                .ToList();
+        }
+
     }
 }
