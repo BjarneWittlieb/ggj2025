@@ -39,9 +39,6 @@ namespace Selection
         {
             yield return new WaitForEndOfFrame();
             
-            // TODO level is loadable?
-            Debug.Log("Whaddup");
-            
             const int level_size = 6;
 
             for (var i = 0; i < level_size; i++)
@@ -49,7 +46,7 @@ namespace Selection
                 _placeableBubbles.Add(_patternLoader.GetRandomPattern());
             }
             
-            Debug.Log(_placeableBubbles.Count);
+            Debug.Log("Level loaded!");
             
             // Subscribe to selection event => update already placed
             _bubbleSelector.OnSelect += PlaceBubble;
@@ -82,6 +79,6 @@ namespace Selection
             _bubbleSelector.OnSelect -= PlaceBubble;
         }
         
-        private bool IsBubbleSettingComplete => _alreadyPlaced >= _placeableBubbles.Count;
+        public bool IsBubbleSettingComplete => _alreadyPlaced >= _placeableBubbles.Count;
     }
 }
