@@ -40,7 +40,7 @@ namespace Selection
 
             Bubbleplacer currentBubble = BubbleUtils.FindBubbleCollidingWith<Bubbleplacer>(transform.position);
 
-            foreach (var area in _bubbleType.Areas)
+            foreach (var area in _bubbleType.areas)
             {
                 foreach (var surroundingBubble in GetBubblesInArea(currentBubble.CurrentPosition, area.Area))
                 {
@@ -52,7 +52,7 @@ namespace Selection
                     GameObject selectionBubble = Instantiate(_bubblePrefab, surroundingBubble.transform.position, Quaternion.identity, transform);
                     selectionBubble.transform.parent = transform;
                     
-                    SetOpacityOfBubbleOverlay(area.Percentage, selectionBubble);
+                    SetOpacityOfBubbleOverlay(area.percentage, selectionBubble);
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace Selection
         /// <param name="startPosition"></param>
         /// <param name="area"></param>
         /// <returns></returns>
-        private List<GameObject> GetBubblesInArea(Vector2Int startPosition, Vector2Int[] area)
+        private List<GameObject> GetBubblesInArea(Vector2Int startPosition, List<Vector2Int> area)
         {
             // Don't touch this, it works! (@Corny)
             return area

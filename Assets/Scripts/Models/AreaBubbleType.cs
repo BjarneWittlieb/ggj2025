@@ -1,11 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Models
 {
+    [Serializable]
     public class AreaBubbleType: BubbleType
     {
-        [SerializeField] private BubbleAreaWithPercentage[] areas;
+        [SerializeField] public BubbleAreaWithPercentage[] areas;
 
-        public BubbleAreaWithPercentage[] Areas => areas;
+        public AreaBubbleType(BubbleAreaWithPercentage[] areas)
+        {
+            this.areas = areas;
+        }
     }
 }

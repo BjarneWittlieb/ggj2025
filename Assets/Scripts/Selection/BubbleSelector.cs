@@ -20,16 +20,21 @@ public class BubbleSelector : MonoBehaviour
 
     public event Action OnSelectionEnd;
     
+    // TODO Rmove this, it's a helper to generate new patterns.
+    private PatternGenerator _patternGenerator;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _patternLoader = GetComponent<PatternLoader>();
+        _patternGenerator = GetComponent<PatternGenerator>();
     }
 
     public void StartSelectionProcess()
     {
         // TODO make area bubble passable
-        _currentSelectionType = _patternLoader.GetRandomPattern();
+        // _currentSelectionType = _patternLoader.GetRandomPattern();
+        _currentSelectionType = _patternGenerator.GetPattern();
         
         _selectedBubble = null;
         _isSelectionActive = true;

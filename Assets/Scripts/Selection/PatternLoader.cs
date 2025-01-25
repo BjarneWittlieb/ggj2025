@@ -21,6 +21,8 @@ namespace Utils
                 AreaBubbleType areaBubbleType = JsonUtility.FromJson<AreaBubbleType>(file.text);
                 
                 areaBubbleTypes.Add(file.name, areaBubbleType);
+                Debug.Log(file.text);
+                Debug.Log(JsonUtility.ToJson(areaBubbleType));
             }
         }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 public class BubbleWobble : MonoBehaviour
 {
     public  float wobbleSpeed = 2f;   
-    public  float wobbleScale = 0.05f; 
+    public  float wobbleScale = 0.02f; 
 
     private Vector3 initialScale;
     private float   randomOffsetX;       
@@ -31,6 +31,6 @@ public class BubbleWobble : MonoBehaviour
                                           );
 
         // rotate???
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.Sin(Time.time * wobbleSpeed + randomOffsetX) * wobbleScale * 20f);
+        // transform.rotation = Quaternion.Euler(0, 0, Mathf.Sin(Time.time * wobbleSpeed + randomOffsetX) * wobbleScale * 20f);
     }
 }
