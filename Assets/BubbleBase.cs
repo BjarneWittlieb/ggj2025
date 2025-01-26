@@ -9,33 +9,50 @@ public class BubbleBase : MonoBehaviour
     
     public GameObject particleEffectPrefab;
     
-    private bool       isPopped;
-    private ScoreLogic scoreLogic;
-
+    // FIELDS
+    private bool       _isPopped;
+    
+    // DEPENDENCIES
+    private ScoreLogic _scoreLogic;
+    private AudioSource _audioSource;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
-        scoreLogic = GameObject.Find("ScoreLogic").GetComponent<ScoreLogic>();
+        _scoreLogic = GameObject.Find("ScoreLogic").GetComponent<ScoreLogic>();
         particleEffectPrefab = Resources.Load<GameObject>("Prefabs/Airpop");
+        
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public virtual void Pop()
     {
-        if (isPopped)
+        if (_isPopped)
             return;
         
-        isPopped = true;
+        _isPopped = true;
+        
+        // Sound
+        PlayPopSound();
         
         // ParticleEffect
         GameObject effect = Instantiate(particleEffectPrefab, transform.position, Quaternion.identity);
         Destroy(effect, 2f);
         
         // Score
-        scoreLogic.AddToScore(score);
+        _scoreLogic.AddToScore(score);
 
         // replace sprite with random popped-sprite
         SpriteRenderer renderer = (SpriteRenderer)gameObject.GetComponentInChildren(typeof(SpriteRenderer));
         int randomNumber = Random.Range(1, 4);
         renderer.sprite = Resources.Load<Sprite>("Sprites/bubbles-popped" + randomNumber);
+    }
+
+    private void PlayPopSound()
+    {
+        if (_audioSource)
+        {
+            _audioSource.Play();
+        }   
     }
 }

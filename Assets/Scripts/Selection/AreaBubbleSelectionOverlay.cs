@@ -52,9 +52,6 @@ namespace Selection
             var bubbleWobble = originalBubble.GetComponent<BubbleWobble>();
             var highlighting = bubbleOverlay.GetComponent<BubbleHighlighting>();
 
-            Debug.Log(bubbleWobble);
-            Debug.Log(highlighting);
-
             highlighting.BubbleWobble = bubbleWobble;
             highlighting.AdjustToBubble = true;
         }

@@ -6,6 +6,8 @@ using Utils;
 
 public class AreaBubble : BubbleBase
 {
+    private readonly static float DELAY_BETWEEN_POPS = .1f;
+    
     [HideInInspector]
     public AreaBubbleConfig config;
 
@@ -26,8 +28,6 @@ public class AreaBubble : BubbleBase
 
     IEnumerator PopNeighbours()
     {
-        var delay = Random.Range(0.1f, 0.2f);
-
         foreach (var area in config.areas)
         {
             var percentile = Random.Range(0f, 1f);
@@ -36,7 +36,7 @@ public class AreaBubble : BubbleBase
             {
                 foreach (var bubbleObject in BubbleUtils.GetBubblesInArea(gridPosition, area.Area))
                 {
-                    yield return new WaitForSeconds(delay);
+                    yield return new WaitForSeconds(DELAY_BETWEEN_POPS);
 
                     bubbleObject.GetComponent<BubbleBase>().Pop();
                 }
