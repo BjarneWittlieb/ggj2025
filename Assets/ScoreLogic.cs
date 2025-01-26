@@ -42,7 +42,7 @@ public class ScoreLogic : MonoBehaviour
     public void AddToScore(int scoreToAdd)
     {
         _currentScore += scoreToAdd;
-        scoreText.text = _currentScore.ToString();
+        scoreText.text = $"{_currentScore} POPS";
     }
     
 }
