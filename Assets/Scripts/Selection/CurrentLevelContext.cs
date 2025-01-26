@@ -36,7 +36,7 @@ namespace Selection
         {
             yield return new WaitForEndOfFrame();
             
-            const int level_size = 6;
+            const int level_size = 12;
 
             for (var i = 0; i < level_size; i++)
             {
