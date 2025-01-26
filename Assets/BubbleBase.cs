@@ -10,7 +10,7 @@ public class BubbleBase : MonoBehaviour
     public GameObject particleEffectPrefab;
     
     // FIELDS
-    private bool       _isPopped;
+    protected bool       _isPopped;
     
     // DEPENDENCIES
     private ScoreLogic _scoreLogic;

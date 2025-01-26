@@ -14,7 +14,7 @@ public class AreaBubble : BubbleBase
     public AreaBubbleConfig config;
     public GameObject linePrefab;
     private List<GameObject> lines = new List<GameObject>();
-    
+
     [FormerlySerializedAs("jsonPath")] public string configName;
 
     protected override void Start()
@@ -53,6 +53,9 @@ public class AreaBubble : BubbleBase
     
     public override void Pop()
     {
+        if (_isPopped)
+            return;
+        
         var allLines = GameObject.FindObjectsByType<LineRenderer>(FindObjectsSortMode.None);
 
         foreach (var line in allLines)
