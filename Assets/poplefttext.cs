@@ -10,7 +10,7 @@ public class poplefttext : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _currentLevelContext = GameObject.Find("grid").GetComponent<CurrentLevelContext>();
+        _currentLevelContext = GameObject.Find("BubbleSelector").GetComponent<CurrentLevelContext>();
         _text = GetComponent<TMP_Text>();
     }
 
