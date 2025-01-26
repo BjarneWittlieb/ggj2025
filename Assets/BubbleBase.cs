@@ -15,6 +15,7 @@ public class BubbleBase : MonoBehaviour
     // DEPENDENCIES
     private ScoreLogic _scoreLogic;
     private AudioSource _audioSource;
+    private BubbleWrap _bubbleWrap;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
@@ -23,6 +24,7 @@ public class BubbleBase : MonoBehaviour
         particleEffectPrefab = Resources.Load<GameObject>("Prefabs/Airpop");
         
         _audioSource = GetComponent<AudioSource>();
+        _bubbleWrap = GameObject.Find("grid").GetComponent<BubbleWrap>();
     }
 
     public virtual void Pop()
@@ -31,6 +33,7 @@ public class BubbleBase : MonoBehaviour
             return;
         
         _isPopped = true;
+        _bubbleWrap.UpdateBubblePop();
         
         // Sound
         PlayPopSound();

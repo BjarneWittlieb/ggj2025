@@ -7,6 +7,8 @@ namespace Selection
     {
         public BubbleWobble BubbleWobble { private get; set; }
 
+        private BubbleWrap _bubbleWrap;
+        
         private float _baseScale;
         
         public bool AdjustToBubble
@@ -18,7 +20,8 @@ namespace Selection
         // Start is called once b
         void Start()
         {
-            _baseScale = transform.localScale.x;
+            _bubbleWrap = GameObject.Find("grid").GetComponent<BubbleWrap>();
+            _baseScale = transform.localScale.x * _bubbleWrap.transform.localScale.x;
         }
 
         // Update is called once per frame

@@ -27,7 +27,8 @@ public class BubbleSelector : MonoBehaviour
     private CurrentLevelContext _currentLevelContext;
     private ISelectionOverlay _currentSelectionOverlay;
     private BubbleWrap _bubbleWrap;
-
+    private AudioSource _audioSource;
+    
     // OUTPUTS
     public event Action<GameObject, GameObject> OnSelect;
 
@@ -36,6 +37,9 @@ public class BubbleSelector : MonoBehaviour
     {
         _currentLevelContext = GetComponent<CurrentLevelContext>();
         _bubbleWrap = FindFirstObjectByType<BubbleWrap>();
+        _audioSource = GetComponent<AudioSource>();
+        
+        this.transform.localScale = _bubbleWrap.transform.localScale;
     }
 
     public void StartSelectionProcess()
@@ -54,6 +58,7 @@ public class BubbleSelector : MonoBehaviour
     {
         if (_selectedBubble)
         {
+            _audioSource.Play();
             OnSelect?.Invoke(_selectedBubble.gameObject, _currentSelectedBubblePrefab);
             _bubbleWrap.PlaceBubble(_currentSelectedBubblePrefab, _selectedBubble.gridPosition);
         }

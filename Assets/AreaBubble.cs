@@ -8,8 +8,8 @@ using Utils;
 
 public class AreaBubble : BubbleBase
 {
-    private readonly static float DELAY_BETWEEN_POPS = .1f;
-    
+    private const float DELAY_BETWEEN_POPS = .06f;
+
     [HideInInspector]
     public AreaBubbleConfig config;
     public GameObject linePrefab;
