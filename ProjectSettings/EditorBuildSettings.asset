@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGame.unity
     guid: f093b80302802d941995468f8602672a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BjarneScene (grid).unity
     guid: 9c6d6279339ca8a428dd6a799d03ee18
   m_configObjects:

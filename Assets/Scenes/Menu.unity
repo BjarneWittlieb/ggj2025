@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2155240881919872574, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
         m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2155240881919872574, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
         m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
         m_MethodName: QuitApplication
         m_Mode: 1
@@ -818,7 +818,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2155240881919872574, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
         m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5

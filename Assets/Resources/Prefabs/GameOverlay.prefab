@@ -830,7 +830,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4945481632732990791}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2155240881919872574, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainGame
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4247523459211302227
 GameObject:
   m_ObjectHideFlags: 0
