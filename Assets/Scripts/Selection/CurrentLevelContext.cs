@@ -15,6 +15,7 @@ namespace Selection
         private List<GameObject> _placeableBubbles = new ();
         private int _alreadyPlaced;
 
+        public int PopsLeft => _placeableBubbles.Count - _alreadyPlaced;
         
         public void Start()
         {
