@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Models;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Selection
 {
     public class PatternLoader: MonoBehaviour
     {
-        private Dictionary<String, AreaBubbleConfig> areaBubbleTypes = new ();
+        [SerializeField]
+        public GameObject[] bubblePrefabs;
 
-        private GameObject[] bubblePrefabs;
-        
         public void Start()
         {
             Debug.Log("start of pattern loader");
-            bubblePrefabs = Resources.LoadAll<GameObject>("Prefabs/BubbleTypes");
+            
+            if (bubblePrefabs.Length == 0)
+                bubblePrefabs = Resources.LoadAll<GameObject>("Prefabs/BubbleTypes");
         }
         
         public GameObject GetRandomBubblePrefab()
         {
-            return bubblePrefabs[UnityEngine.Random.Range(0, bubblePrefabs.Length)];
+            return bubblePrefabs[Random.Range(0, bubblePrefabs.Length)];
         }
     }
 }
