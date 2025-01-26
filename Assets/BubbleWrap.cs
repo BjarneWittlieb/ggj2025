@@ -46,8 +46,8 @@ public class BubbleWrap : MonoBehaviour
 
     public void PlaceBubble(GameObject loadedBubble, Vector2Int gridPosition)
     {
-        loadedBubble.transform.SetParent(transform, false);
-        _allBubbles[gridPosition] = loadedBubble;
+        loadedBubble.transform.SetParent(transform, true);
+        ReplaceBubble(loadedBubble, gridPosition);
 
         var bubble = loadedBubble.GetComponent<BubbleBase>();
         bubble.gridPosition = new Vector2Int(gridPosition.x, gridPosition.y);
@@ -56,5 +56,17 @@ public class BubbleWrap : MonoBehaviour
         Debug.Log("parent name:" + loadedBubble.transform.parent.name);
     }
 
-    public GameObject GetBubble(Vector2Int pos) => _allBubbles.GetValueOrDefault(pos);
+    private void ReplaceBubble(GameObject loadedBubble, Vector2Int gridPosition)
+    {
+        Destroy(GetBubble(gridPosition));
+        _allBubbles[gridPosition] = loadedBubble;
+    }
+
+    public GameObject GetBubble(Vector2Int gridPos) => _allBubbles.GetValueOrDefault(gridPos);
+
+    public GameObject GetBubble(Vector3 worldPos)
+    {
+        var gridPos = tilemap.WorldToCell(worldPos);
+        return GetBubble(new Vector2Int(gridPos.x, gridPos.y));
+    }
 }

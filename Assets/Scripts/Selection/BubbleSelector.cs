@@ -16,7 +16,7 @@ public class BubbleSelector : MonoBehaviour
 
     // FIELDS
     private bool _isSelectionActive;
-    private BasicBubble _selectedBubble;
+    private BubbleBase _selectedBubble;
     private GameObject _currentSelectedBubblePrefab;
 
     private Vector2Int _oldSelectedPosition;
@@ -24,6 +24,7 @@ public class BubbleSelector : MonoBehaviour
     // DEPENDENCIES
     private CurrentLevelContext _currentLevelContext;
     private ISelectionOverlay _currentSelectionOverlay;
+    private BubbleWrap _bubbleWrap;
 
     // OUTPUTS
     public event Action<GameObject, GameObject> OnSelect;
@@ -32,6 +33,7 @@ public class BubbleSelector : MonoBehaviour
     void Start()
     {
         _currentLevelContext = GetComponent<CurrentLevelContext>();
+        _bubbleWrap = FindFirstObjectByType<BubbleWrap>();
     }
 
     public void StartSelectionProcess()
@@ -51,6 +53,7 @@ public class BubbleSelector : MonoBehaviour
         if (_selectedBubble)
         {
             OnSelect?.Invoke(_selectedBubble.gameObject, _currentSelectedBubblePrefab);
+            _bubbleWrap.PlaceBubble(_currentSelectedBubblePrefab, _selectedBubble.gridPosition);
         }
 
         _currentSelectionOverlay?.Destroy();
@@ -65,20 +68,23 @@ public class BubbleSelector : MonoBehaviour
             return;
         }
 
+        if (Input.GetMouseButton((int) MouseButton.Left))
+        {
+            if (_isSelectionActive)
+            {
+                EndSelectionProcess();
+            }
+
+            return;
+        }
+
         if (!_isSelectionActive)
         {
             StartSelectionProcess();
         }
 
-        if (Input.GetMouseButton((int) MouseButton.Left))
-        {
-            EndSelectionProcess();
-            return;
-        }
-
         Vector3 mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
-        _selectedBubble = BubbleUtils.FindBubbleCollidingWith<BasicBubble>(mousePosition);
-
+        _selectedBubble = _bubbleWrap.GetBubble(mousePosition)?.GetComponent<BubbleBase>();
 
         if (_selectedBubble)
         {
@@ -106,7 +112,7 @@ public class BubbleSelector : MonoBehaviour
         if (_currentSelectionOverlay != null)
         {
             _currentSelectionOverlay.Destroy();
-            _currentSelectionOverlay.Render();
+            _currentSelectionOverlay.Render(currentPosition);
         }
 
         _oldSelectedPosition = currentPosition;

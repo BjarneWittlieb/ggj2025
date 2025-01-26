@@ -21,7 +21,6 @@ public class AreaBubble : BubbleBase
     public override void Pop()
     {
         base.Pop();
-
         StartCoroutine(PopNeighbours());
     }
 
