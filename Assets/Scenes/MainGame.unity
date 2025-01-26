@@ -440,10 +440,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2297803259071576383, guid: 300029ab6de0b0b4dacb52113b6d3fad, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2908638985449016188, guid: 300029ab6de0b0b4dacb52113b6d3fad, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.1808553
