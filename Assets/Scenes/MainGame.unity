@@ -127,6 +127,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 58588978740873958, guid: fbcf5c63bd2920f4fad607a2904490d5, type: 3}
+      propertyPath: bubblePrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 58588978740873958, guid: fbcf5c63bd2920f4fad607a2904490d5, type: 3}
+      propertyPath: 'bubblePrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1513474044713686279, guid: 76549fcd6c22b8b4e8a11543d4353df7, type: 3}
+    - target: {fileID: 58588978740873958, guid: fbcf5c63bd2920f4fad607a2904490d5, type: 3}
+      propertyPath: 'bubblePrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1513474044713686279, guid: 00ccfc0a0c1f541469887c00d0645c71, type: 3}
+    - target: {fileID: 58588978740873958, guid: fbcf5c63bd2920f4fad607a2904490d5, type: 3}
+      propertyPath: 'bubblePrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1513474044713686279, guid: 1380314e107e03e4fbaa03877c3e9d40, type: 3}
     - target: {fileID: 1683027866466554739, guid: fbcf5c63bd2920f4fad607a2904490d5, type: 3}
       propertyPath: m_Name
       value: BubbleSelector
