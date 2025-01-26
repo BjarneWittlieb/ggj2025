@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d1cf2e225a3b0e142a361a4f0811af51
+guid: 355b03ff7031e524eaa4fda836c5f016
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      level-placeablebubble-frame_0: -102823876001141481
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

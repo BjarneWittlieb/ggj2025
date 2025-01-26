@@ -1,36 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Models;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
-using UnityEngine.Tilemaps;
 using Utils;
+using Quaternion = UnityEngine.Quaternion;
 
 namespace Selection
 {
     public class AreaBubbleSelectionOverlay: MonoBehaviour, ISelectionOverlay
     {
-        private AreaBubbleType _bubbleType;
+        private AreaBubble _areaBubble;
+        private GameObject _bubblePreviewPrefab;
+        private List<GameObject> _previewBubbles = new();
 
-        private GameObject _bubblePrefab;
-        
-        public void Setup(BubbleType bubbleType)
+        private void Start()
         {
-            _bubbleType = (AreaBubbleType) bubbleType;
-            _bubblePrefab = Resources.Load<GameObject>("Prefabs/SelectionBubble");
+            _bubblePreviewPrefab = Resources.Load<GameObject>("Prefabs/SelectionBubble");
+            _areaBubble          = GetComponent<AreaBubble>();
         }
 
-        public void Render()
+        public void Render(Vector2Int gridPosition)
         {
-            _bubbleType = GetComponent<AreaBubble>().bubbleType;
-            
-            BubbleBase currentBubble = BubbleUtils.FindBubbleCollidingWith<BubbleBase>(transform.position);
-
-            foreach (var area in _bubbleType.areas)
+            foreach (var area in _areaBubble?.config?.areas ?? Array.Empty<BubbleAreaWithPercentage>())
             {
-                foreach (var surroundingBubble in BubbleUtils.GetBubblesInArea(currentBubble.gridPosition, area.Area))
+                foreach (var surroundingBubble in BubbleUtils.GetBubblesInArea(gridPosition, area.Area))
                 {
                     if (!surroundingBubble)
                     {
@@ -39,43 +32,35 @@ namespace Selection
 
                     var position = surroundingBubble.transform.position;
                     position.z = transform.position.z;
-                    GameObject selectionBubble = Instantiate(_bubblePrefab, position, Quaternion.identity, transform);
-                    
-                    SetOpacityOfBubbleOverlay(area.percentage, selectionBubble);
-                    SetupWobbleOfOverlay(selectionBubble, surroundingBubble);
+                    GameObject previewBubble = Instantiate(_bubblePreviewPrefab, position, Quaternion.identity);
+                    _previewBubbles.Add(previewBubble);
+                    SetOpacityOfBubbleOverlay(area.percentage, previewBubble);
+                    SetupWobbleOfOverlay(previewBubble, surroundingBubble);
                 }
             }
         }
-        
+
         private void SetOpacityOfBubbleOverlay(float popPercentage, GameObject bubbleOverlay)
         {
             SpriteRenderer renderer = bubbleOverlay.GetComponent<SpriteRenderer>();
             var baseOpacity = renderer.color.a;
             renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, baseOpacity * popPercentage);
         }
-        
+
         private void SetupWobbleOfOverlay(GameObject bubbleOverlay, GameObject originalBubble)
         {
             var bubbleWobble = originalBubble.GetComponent<BubbleWobble>();
             var highlighting = bubbleOverlay.GetComponent<BubbleHighlighting>();
-            
-            Debug.Log(bubbleWobble);
-            Debug.Log(highlighting);
-            
+
             highlighting.BubbleWobble = bubbleWobble;
             highlighting.AdjustToBubble = true;
         }
-        
+
         public void Destroy()
         {
-            // Destroy all children except the default one
-            foreach (Transform child in transform)
+            foreach (GameObject preview in _previewBubbles)
             {
-                if (child.name == "CenterSelection")
-                {
-                    continue;
-                }
-                Destroy(child.gameObject);
+                Destroy(preview);
             }
         }
     }

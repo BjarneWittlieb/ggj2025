@@ -8,7 +8,7 @@ namespace Selection
 {
     public class PatternLoader: MonoBehaviour
     {
-        private Dictionary<String, AreaBubbleType> areaBubbleTypes = new ();
+        private Dictionary<String, AreaBubbleConfig> areaBubbleTypes = new ();
 
         private GameObject[] bubblePrefabs;
         

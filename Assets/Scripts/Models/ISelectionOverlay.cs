@@ -1,8 +1,10 @@
-﻿namespace Models
+﻿using UnityEngine;
+
+namespace Models
 {
     public interface ISelectionOverlay
     {
-        void Render();
+        void Render(Vector2Int gridPosition);
 
         void Destroy();
     }

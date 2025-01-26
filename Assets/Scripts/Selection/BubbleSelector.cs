@@ -2,10 +2,11 @@ using System;
 using Models;
 using Selection;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using Utils;
 
+/// <summary>
+/// BubblePlayer really
+/// </summary>
 public class BubbleSelector : MonoBehaviour
 {
     // INPUTS
@@ -14,53 +15,53 @@ public class BubbleSelector : MonoBehaviour
     /// </summary>
     [Tooltip("For manual pattern creation. If you don't now what this is, false is the right value.")]
     public bool manualPatternConfiguration = false;
-    
+
     // FIELDS
     private bool _isSelectionActive;
-    private BasicBubble _selectedBubble;
+    private BubbleBase _selectedBubble;
     private GameObject _currentSelectedBubblePrefab;
-    private ISelectionOverlay _currentSelectionOverlay;
 
-    private Vector2Int _beforeSelectedPosition;
-    
+    private Vector2Int _oldSelectedPosition;
+
     // DEPENDENCIES
-    private PatternLoader _patternLoader;
-    // TODO Rmove this, it's a helper to generate new patterns.
-    private PatternGenerator _patternGenerator;
     private CurrentLevelContext _currentLevelContext;
-    
+    private ISelectionOverlay _currentSelectionOverlay;
+    private BubbleWrap _bubbleWrap;
+
     // OUTPUTS
     public event Action<GameObject, GameObject> OnSelect;
-    public event Action OnSelectionEnd;
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _patternLoader = GetComponent<PatternLoader>();
-        _patternGenerator = GetComponent<PatternGenerator>();
         _currentLevelContext = GetComponent<CurrentLevelContext>();
+        _bubbleWrap = FindFirstObjectByType<BubbleWrap>();
     }
 
     public void StartSelectionProcess()
     {
+        _isSelectionActive = true;
+
         // manual selection only for pattern creation. In a level type setup this should always be false
         _currentSelectedBubblePrefab = _currentLevelContext.GetCurrentBubble();
-        
+        _currentSelectedBubblePrefab = Instantiate(_currentSelectedBubblePrefab, transform.position, Quaternion.identity, transform);
+        _currentSelectionOverlay  = _currentSelectedBubblePrefab.GetComponent<ISelectionOverlay>();
+
         _selectedBubble = null;
-        _isSelectionActive = true;
     }
 
     private void EndSelectionProcess()
     {
-        if (_selectedBubble != null)
+        if (_selectedBubble)
         {
             OnSelect?.Invoke(_selectedBubble.gameObject, _currentSelectedBubblePrefab);
+            _bubbleWrap.PlaceBubble(_currentSelectedBubblePrefab, _selectedBubble.gridPosition);
         }
-        
+
+        _currentSelectionOverlay?.Destroy();
         _isSelectionActive = false;
-        OnSelectionEnd?.Invoke();
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -69,71 +70,53 @@ public class BubbleSelector : MonoBehaviour
             return;
         }
 
+        if (Input.GetMouseButton((int) MouseButton.Left))
+        {
+            if (_isSelectionActive)
+            {
+                EndSelectionProcess();
+            }
+
+            return;
+        }
+
         if (!_isSelectionActive)
         {
             StartSelectionProcess();
         }
-        
-        if (Input.GetMouseButton((int) MouseButton.Left))
-        {
-            EndSelectionProcess();
-            return;
-        }
-        
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        _selectedBubble = BubbleUtils.FindBubbleCollidingWith<BasicBubble>(mousePosition);
-        
 
-        if (_selectedBubble != null)
+        Vector3 mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+        _selectedBubble = _bubbleWrap.GetBubble(mousePosition)?.GetComponent<BubbleBase>();
+
+        if (_selectedBubble)
         {
             var currentPosition = _selectedBubble.gridPosition;
             var newPos = new Vector3(_selectedBubble.transform.position.x, _selectedBubble.transform.position.y, transform.position.z);
-            transform.position = newPos;
-            
+            _currentSelectedBubblePrefab.transform.position = newPos;
+
             RenderSelection(currentPosition);
         }
         else
         {
-            _beforeSelectedPosition = new Vector2Int(Int32.MaxValue, Int32.MaxValue);
             // Set to impossible position so it will be rerendered next time
-            DestroySelection();
+            _oldSelectedPosition = new Vector2Int(Int32.MaxValue, Int32.MaxValue);
+            _currentSelectionOverlay?.Destroy();
         }
     }
 
     void RenderSelection(Vector2Int currentPosition)
     {
-        // Only trigger rerender if the current position changed 
-        if (currentPosition == _beforeSelectedPosition)
+        if (currentPosition == _oldSelectedPosition)
         {
             return;
         }
-        
-        DestroySelection();
-
-        _currentSelectionOverlay = _currentSelectedBubblePrefab.GetComponent<ISelectionOverlay>();
 
         if (_currentSelectionOverlay != null)
         {
-            _currentSelectionOverlay.Render();
+            _currentSelectionOverlay.Destroy();
+            _currentSelectionOverlay.Render(currentPosition);
         }
-        
-        _beforeSelectedPosition = currentPosition;
-    }
 
-    void DestroySelection()
-    {
-        // Already destroyed
-        if (_currentSelectionOverlay == null)
-        {
-            return;
-        }
-        
-        // First delete clean up overlay (Destroy all sub gameobjects instantiated)
-        _currentSelectionOverlay.Destroy();
-        
-        // Then remove overlay component
-        Destroy(GetComponentInChildren<AreaBubbleSelectionOverlay>());
-        
-        _currentSelectionOverlay = null;
+        _oldSelectedPosition = currentPosition;
     }
 }
