@@ -7,17 +7,17 @@ public class PatternGenerator : MonoBehaviour
 {
     public Vector2Int[] pattern;
 
-    public AreaBubbleType GetPattern()
+    public AreaBubbleConfig GetPattern()
     {
-        AreaBubbleType areaBubbleType = new AreaBubbleType(new[]
+        AreaBubbleConfig areaBubbleConfig = new AreaBubbleConfig(new[]
         {
             new BubbleAreaWithPercentage(pattern.Select(vec => new Vector2IntData(vec.x, vec.y)).ToList(), 1f)
         });
         
         Debug.Log("GENERATED PATTERN:");
-        Debug.Log(JsonUtility.ToJson(areaBubbleType));
+        Debug.Log(JsonUtility.ToJson(areaBubbleConfig));
         
-        return areaBubbleType;
+        return areaBubbleConfig;
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created

@@ -1,34 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Numerics;
 using Models;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
-using UnityEngine.Tilemaps;
 using Utils;
+using Quaternion = UnityEngine.Quaternion;
 
 namespace Selection
 {
     public class AreaBubbleSelectionOverlay: MonoBehaviour, ISelectionOverlay
     {
-        private AreaBubbleType _bubbleType;
+        private AreaBubble _areaBubble;
+        private GameObject _bubblePreviewPrefab;
 
-        private GameObject _bubblePrefab;
-        
-        public void Setup(BubbleType bubbleType)
+        private void Start()
         {
-            _bubbleType = (AreaBubbleType) bubbleType;
-            _bubblePrefab = Resources.Load<GameObject>("Prefabs/SelectionBubble");
+            _bubblePreviewPrefab = Resources.Load<GameObject>("Prefabs/SelectionBubble");
+            _areaBubble          = GetComponent<AreaBubble>();
         }
 
+        public void RenderPlacementPreview(Vector2Int position)
+        {
+            BubbleBase centerBubble = BubbleUtils.FindBubbleCollidingWith<BubbleBase>(transform.position);
+        }
+        
         public void Render()
         {
-            _bubbleType = GetComponent<AreaBubble>().bubbleType;
-            
             BubbleBase currentBubble = BubbleUtils.FindBubbleCollidingWith<BubbleBase>(transform.position);
 
-            foreach (var area in _bubbleType.areas)
+            foreach (var area in _areaBubble.config.areas)
             {
                 foreach (var surroundingBubble in BubbleUtils.GetBubblesInArea(currentBubble.gridPosition, area.Area))
                 {
@@ -39,10 +37,10 @@ namespace Selection
 
                     var position = surroundingBubble.transform.position;
                     position.z = transform.position.z;
-                    GameObject selectionBubble = Instantiate(_bubblePrefab, position, Quaternion.identity, transform);
+                    GameObject previewBubble = Instantiate(_bubblePreviewPrefab, position, Quaternion.identity, transform);
                     
-                    SetOpacityOfBubbleOverlay(area.percentage, selectionBubble);
-                    SetupWobbleOfOverlay(selectionBubble, surroundingBubble);
+                    SetOpacityOfBubbleOverlay(area.percentage, previewBubble);
+                    SetupWobbleOfOverlay(previewBubble, surroundingBubble);
                 }
             }
         }
@@ -75,6 +73,7 @@ namespace Selection
                 {
                     continue;
                 }
+                
                 Destroy(child.gameObject);
             }
         }

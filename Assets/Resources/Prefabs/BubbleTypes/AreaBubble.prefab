@@ -180,11 +180,9 @@ MonoBehaviour:
   scoreFactor: 0
   name: Diamond
   gridPosition: {x: 0, y: 0}
-  bubbleType:
+  config:
     name: 
-    areas:
-    - area: []
-      percentage: 0
+    areas: []
   configName: Circle_var1
 --- !u!114 &817898892229185085
 MonoBehaviour:

@@ -7,9 +7,11 @@ namespace Selection
     public class BubblePlacer: MonoBehaviour
     {
         private BubbleSelector _bubbleSelector;
-        
+        private BubbleWrap     _bubbleWrap;
+
         void Start()
         {
+            _bubbleWrap = FindFirstObjectByType<BubbleWrap>();
             _bubbleSelector = GetComponent<BubbleSelector>();
 
             _bubbleSelector.OnSelect += HandleSelect;
@@ -22,23 +24,10 @@ namespace Selection
 
         void HandleSelect(GameObject original, GameObject replacement)
         {
-            Instantiate(replacement, original.transform.position, Quaternion.identity, original.transform.parent);
-            // TODO set in bubblewrap
+            _bubbleWrap.PlaceBubble(replacement, original.GetComponent<BubbleBase>().gridPosition);
             
             // The bubble is now the new bubble type, So delete previous bubble type
             Destroy(original);
-            
-            /*
-            switch (selectedType)
-            {
-                case AreaBubbleType areaBubbleType:
-                    var areaBubble = gameObject.AddComponent<AreaBubble>();
-                    areaBubble.bubbleType = areaBubbleType;
-                    break;
-                default:
-                    throw new NotImplementedException("Currently only area bubble is placeable.");
-            }
-            */
         }
     }
 }

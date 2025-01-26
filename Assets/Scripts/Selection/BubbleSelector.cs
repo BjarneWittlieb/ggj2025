@@ -2,7 +2,6 @@ using System;
 using Models;
 using Selection;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Utils;
 
@@ -43,11 +42,13 @@ public class BubbleSelector : MonoBehaviour
 
     public void StartSelectionProcess()
     {
+        _isSelectionActive = true;
+        
         // manual selection only for pattern creation. In a level type setup this should always be false
         _currentSelectedBubblePrefab = _currentLevelContext.GetCurrentBubble();
+        _currentSelectedBubblePrefab = Instantiate(_currentSelectedBubblePrefab, transform.position, Quaternion.identity, transform);
         
         _selectedBubble = null;
-        _isSelectionActive = true;
     }
 
     private void EndSelectionProcess()
@@ -132,7 +133,7 @@ public class BubbleSelector : MonoBehaviour
         _currentSelectionOverlay.Destroy();
         
         // Then remove overlay component
-        Destroy(GetComponentInChildren<AreaBubbleSelectionOverlay>());
+        // Destroy(GetComponentInChildren<AreaBubbleSelectionOverlay>());
         
         _currentSelectionOverlay = null;
     }
