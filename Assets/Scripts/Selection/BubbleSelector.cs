@@ -36,6 +36,8 @@ public class BubbleSelector : MonoBehaviour
     {
         _currentLevelContext = GetComponent<CurrentLevelContext>();
         _bubbleWrap = FindFirstObjectByType<BubbleWrap>();
+        
+        this.transform.localScale = _bubbleWrap.transform.localScale;
     }
 
     public void StartSelectionProcess()
