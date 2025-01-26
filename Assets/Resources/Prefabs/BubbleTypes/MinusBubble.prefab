@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4194584167543794476}
   - component: {fileID: 941112422200756067}
   - component: {fileID: 686237779805486600}
-  - component: {fileID: 701066529615560384}
   - component: {fileID: 6744683551867570282}
   m_Layer: 0
   m_Name: MinusBubble
@@ -108,25 +107,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wobbleSpeed: 2
   wobbleScale: 0.02
---- !u!114 &701066529615560384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3032844388856257458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63272aa9df20efc488025cd2f3fc5011, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 2924118864771949876, guid: a827544a532e43a4e99c1d5e7bc93131, type: 3}
-  - {fileID: -3577410830333116246, guid: e5640812cbf9d4a4eb6bff0b7bc2d44c, type: 3}
-  - {fileID: 8247251890452737138, guid: 0654e73f1f4768148901e3dc3d1d0e49, type: 3}
-  - {fileID: -7084447989037222492, guid: 6ed94521fb2209448b548f8635363bd1, type: 3}
-  - {fileID: 7940139081274305864, guid: 5ef915bf36227a94d9ca42cc7b8fec28, type: 3}
-  - {fileID: -8753064589834904106, guid: 49389658c6c841149ad408bbc9917506, type: 3}
 --- !u!82 &6744683551867570282
 AudioSource:
   m_ObjectHideFlags: 0
@@ -137,8 +117,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 45ad9779ba6d35140801b9b917d4e0da, type: 3}
-  m_Resource: {fileID: 8300000, guid: 45ad9779ba6d35140801b9b917d4e0da, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9bdf737e66b655f469d2e05f59d0e0cd, type: 3}
+  m_Resource: {fileID: 8300000, guid: 9bdf737e66b655f469d2e05f59d0e0cd, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -300,8 +280,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2924118864771949876, guid: a827544a532e43a4e99c1d5e7bc93131, type: 3}
-  m_Color: {r: 0.383204, g: 0.4037736, b: 0.38687673, a: 1}
+  m_Sprite: {fileID: -7394582895762500413, guid: 93836560e6dc3b044accaa0cb7b0140f, type: 3}
+  m_Color: {r: 0.58462805, g: 0.5924529, b: 0.586193, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
