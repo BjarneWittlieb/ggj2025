@@ -204,18 +204,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 361292322}
-    - target: {fileID: 2244256783987434822, guid: c0b59a4e1a868ea4ba1240d29f7f497c, type: 3}
-      propertyPath: scoreForStar1
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2244256783987434822, guid: c0b59a4e1a868ea4ba1240d29f7f497c, type: 3}
-      propertyPath: scoreForStar2
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2244256783987434822, guid: c0b59a4e1a868ea4ba1240d29f7f497c, type: 3}
-      propertyPath: scoreForStar3
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 5942356123599347244, guid: c0b59a4e1a868ea4ba1240d29f7f497c, type: 3}
       propertyPath: m_Name
       value: GameOverlay
@@ -261,8 +249,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 4127008573131555138, guid: c0b59a4e1a868ea4ba1240d29f7f497c, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0b59a4e1a868ea4ba1240d29f7f497c, type: 3}
