@@ -13,7 +13,6 @@ public class AreaBubble : BubbleBase
     [HideInInspector]
     public AreaBubbleConfig config;
     public GameObject linePrefab;
-    private GameObject instantiatedLine;
     private List<GameObject> lines = new List<GameObject>();
     
     [FormerlySerializedAs("jsonPath")] public string configName;
@@ -24,25 +23,28 @@ public class AreaBubble : BubbleBase
         TextAsset file = Resources.Load<TextAsset>("BubbleConfigs/" + configName);
         config = JsonUtility.FromJson<AreaBubbleConfig>(file.text);
         linePrefab = Resources.Load<GameObject>("Prefabs/TargetLines");
-        instantiatedLine = Instantiate(linePrefab);
-        lines.Add(instantiatedLine);
-
     }
 
     public void Update()
     {
         if (this.transform.IsChildOf(GameObject.Find("grid").transform))
         {
-            foreach (var area in config.areas)
+            if (lines.Count == 0)
             {
-                foreach (var bubbleObject in BubbleUtils.GetBubblesInArea(gridPosition, area.Area))
+                foreach (var area in config.areas)
                 {
-                    LineRenderer lineRenderer = instantiatedLine.GetComponentInChildren<LineRenderer>();
-                    if (lineRenderer is not null)
+                    foreach (var bubbleObject in BubbleUtils.GetBubblesInArea(gridPosition, area.Area))
                     {
-                        lineRenderer.positionCount = 2;
-                        lineRenderer.SetPosition(0, this.transform.position); // Startpunkt
-                        lineRenderer.SetPosition(1, bubbleObject.transform.position); // Endpunkt
+                        var instantiatedLine = Instantiate(linePrefab);
+                        LineRenderer lineRenderer = instantiatedLine.GetComponentInChildren<LineRenderer>();
+                    
+                        if (lineRenderer is not null)
+                        {
+                            lines.Add(instantiatedLine);
+                            lineRenderer.positionCount = 2;
+                            lineRenderer.SetPosition(0, this.transform.position); // Startpunkt
+                            lineRenderer.SetPosition(1, bubbleObject.transform.position); // Endpunkt
+                        }
                     }
                 }
             }
