@@ -25,7 +25,7 @@ namespace Selection
         void HandleSelect(GameObject original, GameObject replacement)
         {
             _bubbleWrap.PlaceBubble(replacement, original.GetComponent<BubbleBase>().gridPosition);
-            
+
             // The bubble is now the new bubble type, So delete previous bubble type
             Destroy(original);
         }
