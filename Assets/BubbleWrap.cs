@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
@@ -18,6 +20,12 @@ public class BubbleWrap : MonoBehaviour
     private readonly Dictionary<Vector2Int, GameObject> _allBubbles = new ();
     private          Tilemap                            tilemap;
 
+    private float _poppingCooldown;
+    
+    // OUTPUTS
+    public event Action PoppingStarted;
+    public event Action PoppingEnded;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,9 +33,24 @@ public class BubbleWrap : MonoBehaviour
         tilemap             = _grid.GetComponentInChildren<Tilemap>();
         _loadedBubblePrefab = Resources.Load<GameObject>("Prefabs/BubbleTypes/BasicBubble");
 
+        // -1 means that popping has not started
+        _poppingCooldown = -1f;
+        
         StartCoroutine(SpawnBubbles());
     }
 
+    void Update()
+    {
+        if (_poppingCooldown > 0)
+        {
+            _poppingCooldown -= Time.deltaTime;
+            if (_poppingCooldown <= 0)
+            {
+                PoppingEnded?.Invoke();
+            }
+        } 
+    }
+    
     IEnumerator SpawnBubbles()
     {
         for (int x = upperLeft.x; x <= lowerRight.x; x++)
@@ -68,5 +91,15 @@ public class BubbleWrap : MonoBehaviour
     {
         var gridPos = tilemap.WorldToCell(worldPos);
         return GetBubble(new Vector2Int(gridPos.x, gridPos.y));
+    }
+
+    public void UpdateBubblePop()
+    {
+        // on first pop, cool down is less 0
+        if (_poppingCooldown < 0)
+        {
+            PoppingStarted?.Invoke();
+        }
+        _poppingCooldown = 0.2f;
     }
 }
