@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 552598170}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 552598170}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
         m_MethodName: QuitApplication
         m_Mode: 1
@@ -383,50 +383,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334839003}
   m_CullTransparentMesh: 1
---- !u!1 &552598168
-GameObject:
+--- !u!1001 &640584696
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 552598169}
-  - component: {fileID: 552598170}
-  m_Layer: 0
-  m_Name: ButtonLogic
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &552598169
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 552598168}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -128.75739, y: -77.25516, z: 1.6169379}
-  m_LocalScale: {x: 2.1828105, y: 2.1828105, z: 2.1828105}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1519413865}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &552598170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1519413865}
+    m_Modifications:
+    - target: {fileID: 4528737600367164313, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+      propertyPath: m_Name
+      value: ButtonLogic
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871347299735820379, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -128.75739
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871347299735820379, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -77.25516
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871347299735820379, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.6169379
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871347299735820379, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871347299735820379, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871347299735820379, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871347299735820379, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871347299735820379, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871347299735820379, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871347299735820379, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+--- !u!4 &640584697 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5871347299735820379, guid: a00a73f1332bf1341b14df55ed18c4df, type: 3}
+  m_PrefabInstance: {fileID: 640584696}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 552598168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2aa36f18a6c9384f97635186914fb66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &662498430
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +818,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 552598170}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
@@ -1034,8 +1052,8 @@ RectTransform:
   - {fileID: 1111566434}
   - {fileID: 61745801}
   - {fileID: 334839004}
-  - {fileID: 552598169}
   - {fileID: 662498431}
+  - {fileID: 640584697}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
