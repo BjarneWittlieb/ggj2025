@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
+using Utils;
 
 public class BubbleWrap : MonoBehaviour
 {
@@ -14,8 +16,8 @@ public class BubbleWrap : MonoBehaviour
     public Vector2Int lowerRight;
 
     private Grid _grid;
-
-    private GameObject _loadedBubblePrefab;
+    
+    private List<GameObject> _bubblePrefabs = new List<GameObject>();
 
     private readonly Dictionary<Vector2Int, GameObject> _allBubbles = new ();
     private          Tilemap                            tilemap;
@@ -31,8 +33,16 @@ public class BubbleWrap : MonoBehaviour
     {
         _grid               = GetComponent<Grid>();
         tilemap             = _grid.GetComponentInChildren<Tilemap>();
-        _loadedBubblePrefab = Resources.Load<GameObject>("Prefabs/BubbleTypes/BasicBubble");
-
+        
+        _bubblePrefabs
+            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/LineAreaBubble"), 1)
+            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/ScatterAreaBubble"), 1)
+            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/Diamond-AreaBubble"), 1)
+            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/MinusBubble"), 1)
+            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/GoldenBubble"), 1)
+            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/BasicBubble"), 100)
+            ;
+        
         // -1 means that popping has not started
         _poppingCooldown = -1f;
         
@@ -57,8 +67,10 @@ public class BubbleWrap : MonoBehaviour
         {
             for (int y = upperLeft.y; y >= lowerRight.y; y--)
             {
+                var index = UnityEngine.Random.Range(0, _bubblePrefabs.Count);
+                
                 GameObject loadedBubble =
-                    Instantiate(_loadedBubblePrefab, new Vector3(x, y, 0), Quaternion.identity, transform);
+                    Instantiate(_bubblePrefabs[index], new Vector3(x, y, 0), Quaternion.identity, transform);
 
                 PlaceBubble(loadedBubble, new Vector2Int(x, y));
             }
