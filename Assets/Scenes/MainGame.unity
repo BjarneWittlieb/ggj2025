@@ -204,6 +204,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 361292322}
+    - target: {fileID: 2244256783987434822, guid: c0b59a4e1a868ea4ba1240d29f7f497c, type: 3}
+      propertyPath: scoreForStar1
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2244256783987434822, guid: c0b59a4e1a868ea4ba1240d29f7f497c, type: 3}
+      propertyPath: scoreForStar2
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2244256783987434822, guid: c0b59a4e1a868ea4ba1240d29f7f497c, type: 3}
+      propertyPath: scoreForStar3
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5942356123599347244, guid: c0b59a4e1a868ea4ba1240d29f7f497c, type: 3}
       propertyPath: m_Name
       value: GameOverlay

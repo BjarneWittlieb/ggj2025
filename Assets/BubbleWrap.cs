@@ -35,12 +35,12 @@ public class BubbleWrap : MonoBehaviour
         tilemap             = _grid.GetComponentInChildren<Tilemap>();
         
         _bubblePrefabs
-            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/LineAreaBubble"), 1)
-            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/ScatterAreaBubble"), 1)
-            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/Diamond-AreaBubble"), 1)
+            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/LineAreaBubble"), 6)
+            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/ScatterAreaBubble"), 10)
+            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/Diamond-AreaBubble"), 5)
             .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/MinusBubble"), 1)
-            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/GoldenBubble"), 1)
-            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/BasicBubble"), 100)
+            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/GoldenBubble"), 4)
+            .AddMultiple(Resources.Load<GameObject>("Prefabs/BubbleTypes/BasicBubble"), 200)
             ;
         
         // -1 means that popping has not started
