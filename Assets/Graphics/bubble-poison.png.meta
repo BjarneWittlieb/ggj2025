@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bubble-poison_0: -7394582895762500413
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
